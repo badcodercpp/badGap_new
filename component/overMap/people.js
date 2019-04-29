@@ -10,6 +10,11 @@ import { StyleSheet,
     Dimensions} from 'react-native';
 
 import { withTheme } from 'react-native-paper';
+import { scale, 
+  verticalScale, 
+  moderateScale } from 'react-native-size-matters';
+
+import RF from "react-native-responsive-fontsize"
 
 const {height, width} = Dimensions.get('window');
 
@@ -39,24 +44,27 @@ class PeopleOverMapScreen extends Component {
     }
     render(){
         const { colors } = this.props.theme;
+        const width_img = scale(45),
+          height_img = verticalScale(45),
+          radius_img = ( width_img + height_img ) / 2;
         return (
-            <View style={{position:"absolute",width:width,height:100,backgroundColor:"transparent",bottom:0}}>
+            <View style={{position:"absolute",width:width,height:verticalScale(100),backgroundColor:"transparent",bottom:0}}>
             <ScrollView horizontal={true}>
               {
                 this.state.visiblePeople.map( (a,b)=>{
                   return (
-                    <View key={b} style={{width:90,height:90,borderRightColor:"grey",borderRightWidth:2,borderBottomColor:"grey",borderBottomWidth:2,borderTopColor:"grey",borderTopWidth:2,borderLeftColor:"grey",borderLeftWidth:2,marginRight:10,marginLeft:10,backgroundColor:"#ece5dd",borderRadius:15}}>
+                    <View key={b} style={{width:scale(90),height:verticalScale(100),borderRightColor:"grey",borderRightWidth:2,borderBottomColor:"grey",borderBottomWidth:2,borderTopColor:"grey",borderTopWidth:2,borderLeftColor:"grey",borderLeftWidth:2,marginRight:scale(10),marginLeft:scale(10),backgroundColor:"#ece5dd",borderRadius:15}}>
                       <TouchableOpacity onPress={()=>{
                         //this._clicking_change_location(a);
                         }} >
-                        <View style={{width:90,height:45,justifyContent:"center",alignItems:"center"}} >
-                          <Image style={{width:45,height:45,borderRadius:22.5}} source={{uri: `data:image/png;base64,${a.image}`}} />
+                        <View style={{width:scale(90),height:verticalScale(50),justifyContent:"center",alignItems:"center"}} >
+                          <Image style={{width:width_img,height:height_img,borderRadius:radius_img}} source={{uri: `data:image/png;base64,${a.image}`}} />
                         </View>
-                        <View style={{width:90,height:45,justifyContent:"center",alignItems:"center"}} >
-                          <Text style={{fontSize:15,fontFamily:"sans-serif-light",color:"black"}} >
+                        <View style={{width:scale(90),height:verticalScale(50),justifyContent:"center",alignItems:"center"}} >
+                          <Text style={{fontSize:RF(2.5),fontFamily:"sans-serif-light",color:"black"}} >
                             {a.title}
                           </Text>
-                          <Text style={{fontSize:15,fontFamily:"sans-serif-light",color:"black"}} >
+                          <Text style={{fontSize:RF(1.5),fontFamily:"sans-serif-light",color:"black"}} >
                             {a.gender}
                           </Text>
                         </View>
