@@ -233,8 +233,7 @@ export default class MapViewMarker extends Component {
     render(){
         return (
             <MapView 
-            provider={PROVIDER_GOOGLE}
-            style={{ left:0, right: 0, top:0, bottom: 0, position: 'absolute' }}
+            style={{flex:1, ...StyleSheet.absoluteFillObject}}
             region={{
               latitude: parseFloat(this.props.latitude!==undefined?this.props.latitude:0.00),
               longitude: parseFloat(this.props.longitude!==undefined?this.props.longitude:0.00),
